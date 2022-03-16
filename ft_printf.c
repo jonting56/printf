@@ -6,17 +6,17 @@
 /*   By: jting <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/11 10:17:37 by jting             #+#    #+#             */
-/*   Updated: 2022/03/11 11:54:23 by jting            ###   ########.fr       */
+/*   Updated: 2022/03/16 15:26:46 by jting            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf.h"
 
 int	ft_printf(const char *s, ...)
 {
-	int	i;
-	int count;
-	va_list input;
+	int		i;
+	int		count;
+	va_list	input;
 
 	i = 0;
 	count = 0;
@@ -29,10 +29,9 @@ int	ft_printf(const char *s, ...)
 			i++;
 		}
 		else
-		{
 			count += ft_putchar('%');
-			i++;
-		}
+		i++;
+	}
 	va_end(input);
 	return (count);
 }
@@ -43,17 +42,17 @@ int	check_char(va_list input, const char spec)
 
 	count = 0;
 	if (spec == 'c')
-		return (ft_putchar(input, int));
+		return (ft_putchar(va_arg(input, int)));
 	else if (spec == 's')
-		return (ft_putstr(input, char *));
+		return (ft_printstr(va_arg(input, char *)));
 	else if (spec == 'p')
-		return (ft_putptr(input, unsigned long long));
-	else if (spec == 'd' || spec =='i')
-		return (ft_putnbr(input, int));
+		return (ft_putptr(va_arg(input, unsigned long long)));
+	else if (spec == 'd' || spec == 'i')
+		return (ft_putnbr(va_arg(input, int)));
 	else if (spec == 'u')
-		return (ft_putunsign(input, unsigned int));
+		return (ft_putunsign(va_arg(input, unsigned int)));
 	else if (spec == 'x' || spec == 'X')
-		return (ft_puthex(input, unsigned long));
+		return (ft_puthex(va_arg(input, unsigned long), const char spec));
 	return (count);
 }
 

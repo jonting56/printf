@@ -6,7 +6,7 @@
 /*   By: jting <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/11 11:54:48 by jting             #+#    #+#             */
-/*   Updated: 2022/03/11 12:18:06 by jting            ###   ########.fr       */
+/*   Updated: 2022/03/16 15:46:17 by jting            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ void	ft_putstr(char *s)
 		write(1, &s[i], 1);
 		i++;
 	}
-	return (i);
 }
 
 int	ft_printstr(char *s)
@@ -33,14 +32,18 @@ int	ft_printstr(char *s)
 	if (!s)
 		ft_putstr("(null)");
 	while (s[i])
-		ft_putstr(s);
+	{
+		write(1, &s[i], 1);
+		i++;
+	}
+	return (i);
 }
 
 int	numlen(int n)
 {
 	int			i;
 	long int	long_n;
-	
+
 	if (n == 0)
 		return (1);
 	long_n = n;
@@ -52,11 +55,37 @@ int	numlen(int n)
 	while (long_n)
 	{
 		i++;
-		long_n/= 10;
+		long_n /= 10;
 	}
 	return (i);
 }
 
+char	*itoa(int n)
+{
+	int		i;
+	int		len;
+	char	* result;
+
+	len = numlen(n);
+	result = (char *)malloc(len + 1);
+	if (!result)
+		return (NULL);
+	if (n == 0)
+		result[0] = '0';
+	if (n < 0)
+		result[0] = '-';
+	if (n < 0)
+		n *= -1;
+	i = 0;
+	while (n != 0)
+	{
+		result[len - i - 1] = '0' + (n % 10);
+		n /= 10;
+		i++;
+	}
+	result[len] = '\0';
+	return (result);
+}
 
 int	ft_putnbr(int n)
 {
@@ -64,5 +93,6 @@ int	ft_putnbr(int n)
 
 	num = ft_itoa(n);
 	ft_printstr(num);
+	free(num);
 	return (numlen(n));
 }
