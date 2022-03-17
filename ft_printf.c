@@ -6,7 +6,7 @@
 /*   By: jting <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/11 10:17:37 by jting             #+#    #+#             */
-/*   Updated: 2022/03/17 15:27:46 by jting            ###   ########.fr       */
+/*   Updated: 2022/03/17 15:47:28 by jting            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,10 @@ int	check_char(va_list input, const char spec)
 		count += ft_printptr(va_arg(input, unsigned long long));
 	else if (spec == 'd' || spec == 'i')
 		count += ft_putnbr(va_arg(input, int));
-	else if (spec == 'u')
-		count += ft_putunsign(va_arg(input, unsigned int));
+//	else if (spec == 'u')
+//		count += ft_putunsign(va_arg(input, unsigned int));
 	else if (spec == 'x' || spec == 'X')
-		count += ft_puthex(va_arg(input, unsigned int), spec);
+		count += ft_printhex(va_arg(input, unsigned int), spec);
 	else if (spec == '%')
 		count += ft_printpercent();
 	return (count);
