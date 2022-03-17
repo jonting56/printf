@@ -6,7 +6,7 @@
 #    By: jting <marvin@42.fr>                       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/24 11:47:34 by jting             #+#    #+#              #
-#    Updated: 2022/03/11 10:15:25 by jting            ###   ########.fr        #
+#    Updated: 2022/03/17 14:16:59 by jting            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ CC = gcc
 CFLAGS = -Wall -Werror -Wextra -I . -c
 RM = rm -f 
 
-SRCS = *.c
+SRCS = ft_hex.c ft_putptr.c ft_putstr.c ft_printf.c
 
 OBJS = $(SRCS:.c=.o)
 

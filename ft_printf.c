@@ -6,7 +6,7 @@
 /*   By: jting <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/11 10:17:37 by jting             #+#    #+#             */
-/*   Updated: 2022/03/16 15:26:46 by jting            ###   ########.fr       */
+/*   Updated: 2022/03/17 15:27:46 by jting            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	ft_printf(const char *s, ...)
 			i++;
 		}
 		else
-			count += ft_putchar('%');
+			count += ft_putchar(s[i]);
 		i++;
 	}
 	va_end(input);
@@ -42,22 +42,30 @@ int	check_char(va_list input, const char spec)
 
 	count = 0;
 	if (spec == 'c')
-		return (ft_putchar(va_arg(input, int)));
+		count += ft_putchar(va_arg(input, int));
 	else if (spec == 's')
-		return (ft_printstr(va_arg(input, char *)));
+		count += ft_printstr(va_arg(input, char *));
 	else if (spec == 'p')
-		return (ft_putptr(va_arg(input, unsigned long long)));
+		count += ft_printptr(va_arg(input, unsigned long long));
 	else if (spec == 'd' || spec == 'i')
-		return (ft_putnbr(va_arg(input, int)));
+		count += ft_putnbr(va_arg(input, int));
 	else if (spec == 'u')
-		return (ft_putunsign(va_arg(input, unsigned int)));
+		count += ft_putunsign(va_arg(input, unsigned int));
 	else if (spec == 'x' || spec == 'X')
-		return (ft_puthex(va_arg(input, unsigned long), const char spec));
+		count += ft_puthex(va_arg(input, unsigned int), spec);
+	else if (spec == '%')
+		count += ft_printpercent();
 	return (count);
 }
 
 int	ft_putchar(int c)
 {
 	write(1, &c, 1);
+	return (1);
+}
+
+int	ft_printpercent(void)
+{
+	write(1, "%", 1);
 	return (1);
 }
